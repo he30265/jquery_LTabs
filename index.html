@@ -6,9 +6,42 @@
     <title>选项卡效果</title>
 </head>
 
-<body>
+<body style=" max-width: 400px; margin: 0 auto; padding: 20px; ">
 
-<div class="tabs_box">
+<h3>点击切换</h3>
+<div class="tabs_box demo01">
+    <div class="tabs_tit">
+        <a href="" class="t_nav">Tab 1</a>
+        <a href="" class="t_nav">Tab 2</a>
+        <a href="" class="t_nav">Tab 3</a>
+    </div>
+    <div class="tabs_con">
+        <div class="tcon_li">Tab 1 con</div>
+        <div class="tcon_li">Tab 2 con</div>
+        <div class="tcon_li">Tab 3 con</div>
+    </div>
+</div>
+
+<hr>
+
+<h3>移入切换</h3>
+<div class="tabs_box demo02">
+    <div class="tabs_tit">
+        <a href="" class="t_nav">Tab 1</a>
+        <a href="" class="t_nav">Tab 2</a>
+        <a href="" class="t_nav">Tab 3</a>
+    </div>
+    <div class="tabs_con">
+        <div class="tcon_li">Tab 1 con</div>
+        <div class="tcon_li">Tab 2 con</div>
+        <div class="tcon_li">Tab 3 con</div>
+    </div>
+</div>
+
+<hr>
+
+<h3>自动切换</h3>
+<div class="tabs_box demo03">
     <div class="tabs_tit">
         <a href="" class="t_nav">Tab 1</a>
         <a href="" class="t_nav">Tab 2</a>
@@ -22,24 +55,34 @@
 </div>
 <style>
 * { margin: 0; padding: 0; }
+hr { display: block; height: 1px; margin: 1em 0; padding: 0; border: 0; border-top: 1px solid #ccc; }
 a { text-decoration: none; outline: none; }
-.tabs_box{ width: 400px; margin: 0 auto; }
+h3 { margin-bottom: 10px; }
 .t_nav { display: inline-block; padding: 10px; color: #000; background-color: #fff; }
 .t_nav.active { background-color: #ccc; }
 .tabs_con { padding: 10px; background-color: #ccc; }
 .tcon_li { display: none; }
 </style>
 <script src="jquery-1.8.3.min.js"></script>
+<script src="jquery_LTabs.js"></script>
 <script>
 $(function() {
-    $(".tabs_tit .t_nav").eq(0).addClass('active');
-    $(".tabs_con .tcon_li").eq(0).css('display', 'block');
-    $(".tabs_tit .t_nav").mouseover(function(event) {
-        $(this).addClass('active').siblings().removeClass('active');
-        var a_index = $(this).index();
-        $(".tabs_con .tcon_li").eq(a_index).css('display', 'block');
-        $(".tabs_con .tcon_li").eq(a_index).siblings().css('display', 'none');
-    });
+    // 点击切换
+    $(".demo01").LTabs();
+
+    // 鼠标移入切换
+    $(".demo02").LTabs("mouseover");
+
+    // 自动切换
+    $(".demo03").LTabs();
+    setInterval(function() {
+        var active_index = $(".demo03 .t_nav").index($(".demo03 .t_nav.active"));
+        active_index++;
+        if (active_index == 3) {
+            active_index = 0;
+        };
+        $(".demo03 .t_nav").eq(active_index).click();
+    }, 2000);
 });
 </script>
 
