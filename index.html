@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>选项卡效果</title>
+</head>
+
+<body>
+
+<div class="tabs_box">
+    <div class="tabs_tit">
+        <a href="" class="t_nav">Tab 1</a>
+        <a href="" class="t_nav">Tab 2</a>
+        <a href="" class="t_nav">Tab 3</a>
+    </div>
+    <div class="tabs_con">
+        <div class="tcon_li">Tab 1 con</div>
+        <div class="tcon_li">Tab 2 con</div>
+        <div class="tcon_li">Tab 3 con</div>
+    </div>
+</div>
+<style>
+* { margin: 0; padding: 0; }
+a { text-decoration: none; outline: none; }
+.tabs_box{ width: 400px; margin: 0 auto; }
+.t_nav { display: inline-block; padding: 10px; color: #000; background-color: #fff; }
+.t_nav.active { background-color: #ccc; }
+.tabs_con { padding: 10px; background-color: #ccc; }
+.tcon_li { display: none; }
+</style>
+<script src="jquery-1.8.3.min.js"></script>
+<script>
+$(function() {
+    $(".tabs_tit .t_nav").eq(0).addClass('active');
+    $(".tabs_con .tcon_li").eq(0).css('display', 'block');
+    $(".tabs_tit .t_nav").mouseover(function(event) {
+        $(this).addClass('active').siblings().removeClass('active');
+        var a_index = $(this).index();
+        $(".tabs_con .tcon_li").eq(a_index).css('display', 'block');
+        $(".tabs_con .tcon_li").eq(a_index).siblings().css('display', 'none');
+    });
+});
+</script>
+
+</body>
+
+</html>
